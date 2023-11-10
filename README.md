@@ -1,0 +1,1 @@
+This repository contains code for basic functionalities in R. It either comes (although modified by myself) from a couple of R teachers I follow online, or have been written entirely by me. 
