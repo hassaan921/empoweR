@@ -1,0 +1,50 @@
+# loading packages while checking if one of them is missing and needs installation
+
+libs <- c('pkg1','pkg2','pkg3')
+
+installed.libs <- libs %in% rownames(installed.libs)
+if(any(installed.libs == F)){
+   install.packages(libs[!installed.libs]
+}
+
+invisible(lapply(
+   libs,
+   library,
+   character.only = T))
+
+
+# loading packages if you know you've them installed already
+
+req_pkgs <- c('pkg1','pkg2','pkg3')
+
+lapply(req_pkgs, library, character.only = T)
+
+
+
+
+# if there are outliers that need removal
+
+# Calculate the Tukey's fences
+Q1 <- quantile(data$column, 0.25)
+Q3 <- quantile(pdata$column, 0.75)
+IQR <- Q3 - Q1
+lower_fence <- Q1 - 1.5 * IQR
+upper_fence <- Q3 + 1.5 * IQR
+
+# Identify and display the outliers
+outliers <- data$column[data$column < lower_fence | data$column > upper_fence]
+print(outliers)
+
+# Remove rows with outliers
+data_clean <- data[-outlier_rows, ]
+
+
+# web scraping from tables
+
+col_link <- 'https://www.patriotsoftware.com/blog/accounting/average-cost-living-by-state/'
+col_page <- read_html(col_link)
+
+col_table <- col_page %>% html_nodes('table.has-fixed-layout') %>% 
+  html_table() %>% .[[1]]
+
+col_table 
